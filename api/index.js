@@ -116,9 +116,10 @@ module.exports = (req, res) => {
   }
 
   // Route based on the path
-  if (req.url === '/' || req.url === '/health') {
+  const urlPath = req.url.split('?')[0]; // Get just the path part without query parameters
+  if (urlPath === '/' || urlPath === '/health') {
     return handleHealth(req, res);
-  } else if (req.url === '/api/episode') {
+  } else if (urlPath === '/api/episode') {
     return handleEpisode(req, res);
   } else {
     res.status(404).json({ error: 'Endpoint not found' });
